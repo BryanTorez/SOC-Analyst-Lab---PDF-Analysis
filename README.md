@@ -74,30 +74,44 @@ Let's go ahead and change into that directory. Type in 'cd BTLO\ Suspicious\ USB
 <br />
 <br />
 <br />
-If we go back over to the site, it says "inner ZIP:infected". I'll type in 'infected' in all lowercase in the machine. Now we have two additional files one is the 'autorun.inf' and then the other one is a 'README.pdf' file. Type 'clear' to clear the screen and type in 'ls' to change into the new directory called USB Tye in LS again and we have another directory called auto run so let's go ahead and change into that type in LS and now we can see our two files let's go ahead and clear out the screen here:  <br/>
+If we go back over to the site, it says "inner ZIP: infected". I'll type in 'infected' in all lowercase in the machine. Now we have two additional files. One is the 'autorun.inf' and then the other one is a 'README.pdf' file. Type 'clear' to clear the screen and type in 'ls' to see the directory that you need to change into. Type 'cd USB". Type 'ls' one more time. Now we have another directory called 'autorun'. Let's go ahead and change into that directory after typing in 'ls' one last time. We can see our two files but first, let's go ahead and clear out the screen here by typing 'clear'. :  <br/>
 <br />
-<img src="https://snipboard.io/hxHPYr.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/H2UGjL.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
-<img src="https://snipboard.io/miM0a1.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/1bdnB4.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
+<img src="https://snipboard.io/otyqEY.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
+<img src="https://snipboard.io/XVDKQj.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
-Scrolling down, we have a firewall group that I'll create later on. For the server hostname, I am going to name this as 'MyDFIR-Honeypot and click on 'deploy now':  <br/>
+<img src="https://snipboard.io/KH67B5.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
-<img src="https://snipboard.io/I3o7ml.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/nmMPfN.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
-<br />
-<br />
-<br />
-Now I already have a box that is running and I'll look at that later, but for the one that is being created you can see that it says 'installing'. After a couple of minutes you should see the status as 'running now' we can go ahead and click on our Honeypot:  <br/>
-<br />
-<img src="https://snipboard.io/yHoGPT.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<img src="https://snipboard.io/7kY1w4.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://snipboard.io/2r4RSG.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
+The first thing I'm going to do is obtain a file hash for these two particular files. In order to do that, I'll type in 'sha256sum *' into the machine. This will tell REMnux to generate a 'Sha256' hash on these two files. I'll open up my trusty notepad and let's go ahead and copy and paste these values in there. Now that we generated a file hash, the next thing that you can do is search on virus total to see if anybody else has analyzed these files:  <br/>
 <br />
-If you take a look at the top right corner you will see a 'View Console'. That is what we're going to be using to interact with our Honeypot. Go ahead and click on 'View Console' and we get this screen:  <br/>
+<img src="https://snipboard.io/jNlWwP.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<img src="https://snipboard.io/sEKwvQ.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<img src="https://snipboard.io/nTxMbv.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<img src="https://snipboard.io/Dbl5ar.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<br />
+<br />
+<br />
+Before we do that, let's continue on with this analysis. Whenever you download any type of file you don't always want to trust the file extension that you see. For example, we can see that this file is called 'readme.pdf'. Now you don't want to always trust that this particular file is a PDF file just because it says PDF. You might ask, "But Bryan how do we determine if that file is actually a PDF file or not?" This is where a magic number comes in handy, AKA a file signature. These are essentially the first couple of bytes that make up a file. In other words, these bytes are how the operating system can determine the file's file type. :  <br/>
+<br />
+<img src="https://snipboard.io/gZLi6m.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<br />
+<br />
+<br />
+I'll show you a site that I love to use so if you head over to Google and search up Gary Kesler magic number you want to select the first result which is gck file signatures table click on that and from here I can do a crlf to find and I'll type in PDF so this right here is our magic number or file signature for a PDF file the first couple bytes are 25 50 44 and 46 now if I head back over into my SSH session within Linux there is a command called file that will allow you to determine what the file type of this particular file is for example I'll type in file and then point it over to readme.pdf and it spits out hey it's a PDF document but how did file determine that and that is based on the magic number SL file signature which is what we see right here:  <br/>
 <br />
 <img src="https://snipboard.io/YPcEjU.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
