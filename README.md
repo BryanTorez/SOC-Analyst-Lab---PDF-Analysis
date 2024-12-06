@@ -7,7 +7,12 @@ USB's can often lead to a security compromise if proper security measures are no
 
 <h2>Applications Used </h2>
 REMnux Malware Toolkit Website (https://docs.remnux.org/install-distro/get-virtual-appliance)
-Blue Teams Labs Login Website (https://blueteamlabs.online/login)
+<br />
+<br />
+Blue Teams Labs Website (https://blueteamlabs.online/login)
+<br />
+<br />
+Virustotal Website (https://www.virustotal.com/gui/home/upload)
 
 <h2>Walk-through Project:</h2>
 
@@ -178,7 +183,7 @@ I'll go ahead and clear out the screen. Type in 'ls' again. We do have another f
 <br />
 <br />
 <br />
-By looking at this, we can assume that once this USB was inserted it would automatically run and open this particular document called 'README.pdf'. So how do we begin analyzing PDF documents? Well, when it comes to PDFs these file types contain what are called Elements, which can then be drilled down via objects. We can do this using various different tools however the one that we'll be using today is called 'peepdf'. It does come built-in with remnux. So if you are following along, I do highly recommend that you spin up remnex to perform your analysis. To use this tool all we need to do is just point it over to our 'peepdf README.pdf'. :  <br/>
+By looking at this, we can assume that once this USB was inserted it would automatically run and open this particular document called 'README.pdf'. So how do we begin analyzing PDF documents? Well, when it comes to PDFs these file types contain what are called Elements, which can then be drilled down via objects. We can do this using various different tools however the one that we'll be using today is called 'peepdf'. It does come built-in with REMnux. So if you are following along, I do highly recommend that you spin up REMnex to perform your analysis. To use this tool all we need to do is just point it over to our 'peepdf README.pdf'. :  <br/>
 <br />
 <img src="https://snipboard.io/1X0KqT.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
@@ -250,7 +255,7 @@ I'll type 'object 27' and 'object 28' in the notepad. Then in I'll type in 'obje
 <br />
 <br />
 <br />
-Now if we scroll back up. We do have another suspicious element that is called 'AA'. Which will automatically launch when this PDF is opened and this is within 'object 3'. So let's drill into object three and take a look. Here we can see a lot of other elements. If we take a look at 'AA' again, we can see that it is pointing over to 28 and if you recall if we go back over to 'object 28' it executes this command right here using command prompt. Now we know what happens immediately once the USB is plugged in. To recap, once the USB is plugged in it will automatically run this 'readme.pdf' file, which then executes this command prompt with this command. :  <br/>
+Now if we scroll back up. We do have another suspicious element that is called 'AA'. Which will automatically launch when this PDF is opened and this is within 'object 3'. So let's drill into object three and take a look. Here we can see a lot of other elements. If we take a look at 'AA' again, we can see that it is pointing over to 28 and if you recall if we go back over to 'object 28' it executes this command right here using the command prompt. Now we know what happens immediately once the USB is plugged in. To recap, once the USB is plugged in it will automatically run this 'readme.pdf' file, which then executes this command prompt with this command. :  <br/>
 <br />
 <img src="https://snipboard.io/s17dvM.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
@@ -288,11 +293,17 @@ If we were to search up the file hash for this readme.pdf document. I'll go ahea
 <br />
 Let's head over to Blue Team, level one, and start answering some of these questions. 
 <br />
-Starting with number one, what file is the autorun.inf running? Well if we head over to our SSH and type 'cat autorun.inf'. This is running 'README.pdf'. So go ahead and copy and paste that in here then click 'Submit'.
+For question one, 'what file is the autorun.inf running?
 <br />
-Does the pdf virustotalscan? (no malicious results returned) True or False? This is false because we did see a lot a lot of security vendors flagging this 43 to be exact
+Well if we head over to our SSH and type 'cat autorun.inf'. This is running 'README.pdf'. So go ahead and copy and paste that in here then click 'Submit'.
 <br />
-Does the file have the correct magic number? Yes, it does because if you recall if we type in 'xxd README.pdf | head". We can see that the first couple bites are '25', '50', '44', and '46'. Which again if we head over to Gary Kesler for a proper PDF file document, the first couple bytes must start with '25', '50', '44', and '46'. :  <br/>
+Second question, 'does the pdf pass virustotal scan? (no malicious results returned) True or False?
+<br />
+This is false because we did see a lot of security vendors flagging this 43 to be exact.
+<br />
+Third question, 'does the file have the correct magic number?'
+<br />
+Yes, it does because if you recall if we type in 'xxd README.pdf | head". We can see that the first couple bites are '25', '50', '44', and '46'. Which again if we head over to Gary Kesler for a proper PDF file document, the first couple bytes must start with '25', '50', '44', and '46'. :  <br/>
 <br />
 <img src="https://snipboard.io/vcgNTF.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
@@ -319,11 +330,17 @@ Does the file have the correct magic number? Yes, it does because if you recall 
 <br />
 <br />
 <br />
-What OS type can the file exploit? (Linux, Mac OS, Windows, Etc) This is going to be Windows. How do I know that? Well if we go back over to our notepad, the command 'command.exe' is pointing to the directory of 'C windows system32'. So that is why I am saying Windows.
+The fourth question, 'What OS type can the file exploit?'
 <br />
-A Windows executable is mentioned in the PDF file, what is it? It is 'cmd.exe'. 
+(Linux, Mac OS, Windows, Etc) This is going to be Windows. How do I know that? Well if we go back over to our notepad, the command 'command.exe' is pointing to the directory of 'C windows system32'. So that is why I am saying Windows.
 <br />
-Finally the last question, how many suspicious /OpenAction elements does the file have? Let's type in 'peepdf -i README.pdf'. With this we're looking for 'OpenAction'. As we can see there is only one 'OpenAction'. So type that in.   qwds: <br/>
+The fifth question, 'A Windows executable is mentioned in the PDF file, what is it?' 
+<br />
+It is 'cmd.exe'. 
+<br />
+Finally the last question, 'How many suspicious /OpenAction elements does the file have?'
+<br />
+Let's type in 'peepdf -i README.pdf'. With this, we're looking for 'OpenAction'. As we can see there is only one 'OpenAction'.: <br/>
 <br />
 <img src="https://snipboard.io/bhVHop.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
@@ -340,87 +357,5 @@ Finally the last question, how many suspicious /OpenAction elements does the fil
 <br />
 <br />
 <br />
-Hopefully by following along you are starting to gain a bit more confidence in your ability to analyze PDFs now I am aware that this
-16:35
-was quite a high level overview of how
-16:37
-to analyze PDFs but if you are
-16:39
-interested in doing more exercises
-16:41
-especially the ones that involve Word
-16:43
-documents or JavaScript I would invite
-16:45
-you to take a look into the my def for
-16:47
-analyst course as we continue to work
-16:50
-together on identifying suspicious
-16:52
-activity within these files and then we
-16:54
-learn how to uncover additional ioc's
-16:56
-that we can use to further our
-16:58
-investigation
-16:59
-details will be provided in the
-17:01
-description down below that is it for
-17:03
-the video and I hope you found that
-17:05
-informative thank you so much for
-17:07
-watching And subscribe if you want to
-17:09
-remember to stay curious and do things
-17:12
-differently
-:  <br/>
-<br />
-<img src="https://snipboard.io/bfcRXU.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<img src="https://snipboard.io/OPXwiH.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-:  <br/>
-<br />
-<img src="https://snipboard.io/bfcRXU.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<img src="https://snipboard.io/OPXwiH.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-:  <br/>
-<br />
-<img src="https://snipboard.io/bfcRXU.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<img src="https://snipboard.io/OPXwiH.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-:  <br/>
-<br />
-<img src="https://snipboard.io/bfcRXU.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<img src="https://snipboard.io/OPXwiH.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-:  <br/>
-<br />
-<img src="https://snipboard.io/bfcRXU.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<img src="https://snipboard.io/OPXwiH.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-:  <br/>
-<br />
-<img src="https://snipboard.io/bfcRXU.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<img src="https://snipboard.io/OPXwiH.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-:  <br/>
-<br />
-<img src="https://snipboard.io/bfcRXU.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<img src="https://snipboard.io/OPXwiH.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
-<br />
-<br />
+Now I am aware that this was quite a high-level overview of how to analyze PDFs. Hopefully by following along you are starting to gain a bit more confidence in your ability to analyze PDFs. :  <br/>
 <br />
