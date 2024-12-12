@@ -205,8 +205,6 @@ At the bottom, we can see objects with JS code and this is within object number 
 <br />
 <img src="https://snipboard.io/PfQkvo.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
-<img src="https://snipboard.io/OPXwiH.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<br />
 <br />
 <br />
 <br />
@@ -293,17 +291,15 @@ If we were to search up the file hash for this readme.pdf document. I'll go ahea
 <br />
 Let's head over to Blue Team, level one, and start answering some of these questions. 
 <br />
-For question one, 'what file is the autorun.inf running?
 <br />
-Well if we head over to our SSH and type 'cat autorun.inf'. This is running 'README.pdf'. So go ahead and copy and paste that in here then click 'Submit'.
+For question one, 'what file is the autorun.inf running? Well if we head over to our SSH and type 'cat autorun.inf'. This is running 'README.pdf'. So go ahead and copy and paste that in here then click 'Submit'.
 <br />
-Second question, 'does the pdf pass virustotal scan? (no malicious results returned) True or False?
 <br />
-This is false because we did see a lot of security vendors flagging this 43 to be exact.
+Second question, 'does the pdf pass virustotal scan? (no malicious results returned) True or False? This is false because we did see a lot of security vendors flagging this 43 to be exact.
 <br />
-Third question, 'does the file have the correct magic number?'
 <br />
-Yes, it does because if you recall if we type in 'xxd README.pdf | head". We can see that the first couple bites are '25', '50', '44', and '46'. Which again if we head over to Gary Kesler for a proper PDF file document, the first couple bytes must start with '25', '50', '44', and '46'. :  <br/>
+Third question, 'does the file have the correct magic number? Yes, it does because if you recall if we type in 'xxd README.pdf | head". We can see that the first couple bites are '25', '50', '44', and '46'. Which again if we head over to Gary Kesler for a proper PDF file document, the first couple bytes must start with '25', '50', '44', and '46'. :  <br/>
+<br />
 <br />
 <img src="https://snipboard.io/vcgNTF.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
@@ -330,17 +326,13 @@ Yes, it does because if you recall if we type in 'xxd README.pdf | head". We can
 <br />
 <br />
 <br />
-The fourth question, 'What OS type can the file exploit?'
+The fourth question, 'What OS type can the file exploit?' (Linux, Mac OS, Windows, etc.). This is going to be Windows. How do I know that? Well if we go back over to our notepad, the command 'command.exe' is pointing to the directory of 'C windows system32'. So that is why I am saying Windows.
 <br />
-(Linux, Mac OS, Windows, Etc) This is going to be Windows. How do I know that? Well if we go back over to our notepad, the command 'command.exe' is pointing to the directory of 'C windows system32'. So that is why I am saying Windows.
 <br />
-The fifth question, 'A Windows executable is mentioned in the PDF file, what is it?' 
+The fifth question, 'A Windows executable is mentioned in the PDF file, what is it? It is 'cmd.exe'. 
 <br />
-It is 'cmd.exe'. 
 <br />
-Finally the last question, 'How many suspicious /OpenAction elements does the file have?'
-<br />
-Let's type in 'peepdf -i README.pdf'. With this, we're looking for 'OpenAction'. As we can see there is only one 'OpenAction'.: <br/>
+Finally the last question, 'How many suspicious /OpenAction elements does the file have? Let's type in 'peepdf -i README.pdf'. With this, we're looking for 'OpenAction'. As we can see there is only one 'OpenAction'.: <br/>
 <br />
 <img src="https://snipboard.io/bhVHop.jpg" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
@@ -357,5 +349,5 @@ Let's type in 'peepdf -i README.pdf'. With this, we're looking for 'OpenAction'.
 <br />
 <br />
 <br />
-Now I am aware that this was quite a high-level overview of how to analyze PDFs. Hopefully by following along you are starting to gain a bit more confidence in your ability to analyze PDFs. :  <br/>
+Now I know this was quite a high-level overview of how to analyze PDFs. By following along, I hope you are gaining more confidence in your ability to analyze PDFs. <br/>
 <br />
