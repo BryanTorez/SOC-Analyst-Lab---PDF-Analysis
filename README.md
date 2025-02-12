@@ -2,7 +2,7 @@
 
 
 <h2>Description</h2>
-USBs can often lead to a security compromise if proper security measures are not in place, such as disabling the usage of USBs, having a proper EDR solution, or sometimes proper security awareness training. Although some companies utilize a Cloud solution as a replacement for what a USB has to offer, such as transferring files in and out of the environment, many organizations still utilize USBs. One, they can be cheaper. Two, it is something you own. Third, it is portable. In this walk-through project, we'll be going over a lab provided by 'Blue Team labs' called, 'Suspicious USB Stick' where we'll be analyzing the contents that were found in a USB after a startup company has been compromised. I'll be using REMnux, a Linux malware analysis toolkit, to help with analyzing these contents, and if you aren't sure how to get started with REMnux. I'll leave a link in the description for you down below. Let's get started to get started with this lab.
+USBs can often lead to a security compromise if proper security measures are not in place, such as disabling the usage of USBs, having a proper EDR solution, or sometimes proper security awareness training. Although some companies utilize a Cloud solution to replace what a USB has to offer, such as transferring files in and out of the environment, many organizations still utilize USBs. One, they can be cheaper. Two, it is something you own. Third, it is portable. In this walk-through project, we'll be going over a lab provided by 'Blue Team labs' called, 'Suspicious USB Stick' where we'll be analyzing the contents that were found in a USB after a startup company has been compromised. I'll be using REMnux, a Linux malware analysis toolkit, to help with analyzing these contents, and if you aren't sure how to get started with REMnux. I'll leave a link in the description for you down below. Let's get started with this lab.
 
 
 <h2>Applications Used </h2>
@@ -45,14 +45,14 @@ Let's quickly go over the scenario. "One of our clients informed us that they re
 <br />
 <br />
 <br />
-The reason why I'm doing this is that I am using REMnux for my file analysis and I am currently SSH'd into my REMnux machine. Again, if you don't know how to get started with REMnux, I'll leave a link in the description down below. : <br/>
+The reason why I'm doing this is that I'm using REMnux for my file analysis. Now I'm currently SSH'd into my REMnux machine. Again, if you don't know how to get started with REMnux, I'll leave a link to some of its documentation. https://docs.remnux.org/install-distro/install-from-scratch: <br/>
 <br />
 <img src="https://snipboard.io/ZSC3XJ.jpg" height="100%" width="100%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
 <br />
 <br />
-I am going to type in "wget" and paste my link. Once it's done downloading, I'll type in "ls" and my file is right there.
+I'm going to type in "wget" and paste my link. Once it's done downloading, I'll type in "ls" and my file is right there.
 <br />
 <br />
 <img src="https://snipboard.io/sJt4h2.jpg" height="100%" width="100%" alt="Disk Sanitization Steps"/>
